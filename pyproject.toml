@@ -1,0 +1,25 @@
+[project]
+name = "waste-product-classifier"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Renato Silveira", email = "ren.oliv87@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib==3.9.2",
+    "numpy>=1.26.4",
+    "opencv-python>=4.11.0.86",
+    "pandas>=2.3.3",
+    "pillow>=12.3.0",
+    "scikit-learn==1.5.1",
+    "tensorflow==2.17.0",
+]
+
+[project.scripts]
+waste-product-classifier = "waste_product_classifier:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
