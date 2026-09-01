@@ -84,5 +84,5 @@ def load_config() -> Config:
         data_dir=Path(os.environ.get("ADC_DATA_DIR", DEFAULT_DATA_DIR)),
         artifacts_dir=Path(os.environ.get("ADC_ARTIFACTS_DIR", DEFAULT_ARTIFACTS_DIR)),
         ollama_host=os.environ.get("OLLAMA_HOST", DEFAULT_OLLAMA_HOST),
-        ollama_model=os.environ.get("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL),
+        ollama_model=os.environ.get("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
     )

@@ -64,7 +64,7 @@ def get_datasets(
         count_images(config.train_dir),
         count_images(config.valid_dir),
         count_images(config.test_dir),
-        class_names,
+        class_names
     )
 
     rescale = layers.Rescaling(1.0 / 255.0)
