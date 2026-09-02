@@ -11,7 +11,7 @@ from waste_product_classifier.gradcam.gradcam import get_class_names, load_and_p
 from waste_product_classifier.inference import classify_score
 from waste_product_classifier.benchmark.vlm_zero_shot import OLLAMA_HOST, classify_with_vlm
 
-VLM_MODEL = "qwen2.5vl"
+VLM_MODEL = "qwen2.5vl:3b"
 RESULTS_FILENAME = "benchmark_results.csv"
 
 # Keep this modest — VLM calls are much slower than a batched CNN forward pass

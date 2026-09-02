@@ -82,5 +82,5 @@ def test_run_benchmark_covers_every_image_in_the_test_set(populated_config, monk
 
     assert len(df) == 4
     assert len(vlm_calls) == 4
-    assert all(model_name == "qwen2.5vl" for model_name in vlm_calls)
+    assert all(model_name == "qwen2.5vl:3b" for model_name in vlm_calls)
     assert (populated_config.artifacts_dir / benchmark.RESULTS_FILENAME).exists()
