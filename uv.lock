@@ -1359,8 +1359,44 @@ wheels = [
 ]
 
 [[package]]
-name = "tensorflow"
-version = "2.17.0"
+name = "tensorflow-cpu"
+version = "2.17.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "absl-py" },
+    { name = "astunparse" },
+    { name = "flatbuffers" },
+    { name = "gast" },
+    { name = "google-pasta" },
+    { name = "grpcio" },
+    { name = "h5py" },
+    { name = "keras" },
+    { name = "libclang" },
+    { name = "ml-dtypes" },
+    { name = "numpy" },
+    { name = "opt-einsum" },
+    { name = "packaging" },
+    { name = "protobuf" },
+    { name = "requests" },
+    { name = "setuptools" },
+    { name = "six" },
+    { name = "tensorboard" },
+    { name = "tensorflow-intel", marker = "sys_platform == 'win32'" },
+    { name = "tensorflow-io-gcs-filesystem", marker = "python_full_version < '3.12'" },
+    { name = "termcolor" },
+    { name = "typing-extensions" },
+    { name = "wrapt" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/da/27/afecc02c2b99e7f14c4aefc983977344121a37516dac68312071eca8fb4c/tensorflow_cpu-2.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4935d35d15924602605c839cb6cd5a578f89f626d8736f62065fe3a089b63b6f", size = 221239512, upload-time = "2024-10-24T23:00:15.886Z" },
+    { url = "https://files.pythonhosted.org/packages/51/7d/f8db203f7107039ea069500bfd50626af3756cce6bc1d1e74749e5347ac3/tensorflow_cpu-2.17.1-cp311-cp311-win_amd64.whl", hash = "sha256:54e4be9d5f687229f9e2b91480afed27709a0efe56f642dc4d99b80fbbb98363", size = 7571, upload-time = "2024-10-24T23:00:21.118Z" },
+    { url = "https://files.pythonhosted.org/packages/ae/01/58d8731d9e2408a05cada8d582f073e33ea041b9818c4e146e21ff4973c6/tensorflow_cpu-2.17.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:10567f927153f9789e7e7c92bac27f13ca22dfa0a60dc03a831343c96f4efb9e", size = 221357300, upload-time = "2024-10-24T23:00:24.577Z" },
+    { url = "https://files.pythonhosted.org/packages/71/40/3ecf1edb287c48025ac9a4f91e6c0146c1af85016d74f9b03691161a1c9c/tensorflow_cpu-2.17.1-cp312-cp312-win_amd64.whl", hash = "sha256:c15e1af1c5007dc328448f30b2a0f15d01573dbd704f83f8704e0d018b296319", size = 7575, upload-time = "2024-10-24T23:00:30.612Z" },
+]
+
+[[package]]
+name = "tensorflow-intel"
+version = "2.17.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "absl-py" },
@@ -1387,14 +1423,8 @@ dependencies = [
     { name = "wrapt" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0f/a5/89a9bdae9f241cad167edb6c890ef2b4c842c5ae81058a2fbfd702dba9bf/tensorflow-2.17.0-cp311-cp311-macosx_12_0_arm64.whl", hash = "sha256:e8d26d6c24ccfb139db1306599257ca8f5cfe254ef2d023bfb667f374a17a64d", size = 236174211, upload-time = "2024-07-11T16:46:38.778Z" },
-    { url = "https://files.pythonhosted.org/packages/76/81/a03d7724df23d476af954673ae79836a5ca8d6fde66f88483dbe26f61a23/tensorflow-2.17.0-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ca82f98ea38fa6c9e08ccc69eb6c2fab5b35b30a8999115b8b63b6f02fc69d9d", size = 223945591, upload-time = "2024-07-11T16:46:48.327Z" },
-    { url = "https://files.pythonhosted.org/packages/63/4e/f5404467b31cf640ed8de31a283d104c845be6fa430dac9daef0c4385af8/tensorflow-2.17.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8339777b1b5ebd8ffadaa8196f786e65fbb081a371d8e87b52f24563392d8552", size = 601301478, upload-time = "2024-07-11T16:47:05.705Z" },
-    { url = "https://files.pythonhosted.org/packages/ed/b6/62345568cd07de5d9254fcf64d7e44aacbb6abde11ea953b3cb320e58d19/tensorflow-2.17.0-cp311-cp311-win_amd64.whl", hash = "sha256:ef615c133cf4d592a073feda634ccbeb521a554be57de74f8c318d38febbeab5", size = 2046, upload-time = "2024-07-11T16:52:09.532Z" },
-    { url = "https://files.pythonhosted.org/packages/e0/cb/aab1d277dc1cb45166a1ac857bf535ef322437f4f6fbef55ad6dee31e00d/tensorflow-2.17.0-cp312-cp312-macosx_12_0_arm64.whl", hash = "sha256:ee18b4fcd627c5e872eabb25092af6c808b6ec77948662c88fc5c89a60eb0211", size = 236281093, upload-time = "2024-07-11T16:47:22.877Z" },
-    { url = "https://files.pythonhosted.org/packages/e5/db/a365f4bdb6a0067ea9cc0a4b27757e2755627f3ff29dcca4cce3d274662d/tensorflow-2.17.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:72adfef0ee39dd641627906fd7b244fcf21bdd8a87216a998ed74d9c74653aff", size = 224039182, upload-time = "2024-07-11T16:47:32.468Z" },
-    { url = "https://files.pythonhosted.org/packages/d7/24/f7b5c130975303efa4a91341e294fd784b94910c2a4c0f0f0561e5fc7405/tensorflow-2.17.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0ad7bfea6afb4ded3928ca5b24df9fda876cea4904c103a5163fcc0c3483e7a4", size = 601419499, upload-time = "2024-07-11T16:47:48.447Z" },
-    { url = "https://files.pythonhosted.org/packages/48/a7/2f03f6de3c4976db6d2a898c408feb491ca10399af1f6039d6bef3e6ba6a/tensorflow-2.17.0-cp312-cp312-win_amd64.whl", hash = "sha256:278bc80642d799adf08dc4e04f291aab603bba7457d50c1f9bc191ebbca83f43", size = 2045, upload-time = "2024-07-11T16:52:11.638Z" },
+    { url = "https://files.pythonhosted.org/packages/00/ae/60aa6a9120cfe5d26cf8f4dff7248b2fe25798d036d58afecf1da4ff0528/tensorflow_intel-2.17.1-cp311-cp311-win_amd64.whl", hash = "sha256:8abd1fef0e4de4b97b08bfc9efd4e2352afefd9f2f9aa04e0691e67ea5a6e7ac", size = 382251128, upload-time = "2024-10-24T23:28:49.153Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/c0/0e6a6b78883e63d1e215efe27f6df9bc96809bf4768fa2a81654af8622c8/tensorflow_intel-2.17.1-cp312-cp312-win_amd64.whl", hash = "sha256:086b323b207857d163eec40256d13d4eb2a844342dbe73ee35cf8784be82e324", size = 382383602, upload-time = "2024-10-24T23:29:02.661Z" },
 ]
 
 [[package]]
@@ -1468,7 +1498,7 @@ dependencies = [
     { name = "pandas" },
     { name = "pillow" },
     { name = "scikit-learn" },
-    { name = "tensorflow" },
+    { name = "tensorflow-cpu" },
 ]
 
 [package.metadata]
@@ -1479,7 +1509,7 @@ requires-dist = [
     { name = "pandas", specifier = ">=2.3.3" },
     { name = "pillow", specifier = ">=12.3.0" },
     { name = "scikit-learn", specifier = "==1.5.1" },
-    { name = "tensorflow", specifier = "==2.17.0" },
+    { name = "tensorflow-cpu", specifier = "==2.17.1" },
 ]
 
 [[package]]
