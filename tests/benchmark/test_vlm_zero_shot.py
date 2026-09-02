@@ -38,10 +38,23 @@ def test_classify_with_vlm_returns_parsed_label_confidence_and_latency(tmp_path,
     fake_client = FakeOllamaClient('{"label": "recyclable", "confidence": 0.9, "reason": "plastic"}')
     monkeypatch.setattr(vlm_zero_shot, "client", fake_client)
 
-    result = classify_with_vlm(image_path, model_name="qwen2.5vl")
+    result = classify_with_vlm(image_path, model_name="qwen2.5vl:3b")
 
     assert result["label"] == "recyclable"
     assert result["confidence"] == 0.9
     assert result["reason"] == "plastic"
     assert result["latency_s"] >= 0
-    assert fake_client.last_call["model"] == "qwen2.5vl"
+    assert fake_client.last_call["model"] == "qwen2.5vl:3b"
+
+
+def test_classify_with_vlm_defaults_to_the_3b_model(tmp_path, monkeypatch):
+    """Docker only pulls qwen2.5vl:3b, so the default model_name must match that
+    exact tag or callers that omit it (e.g. the Streamlit app) will 404."""
+    image_path = tmp_path / "img.jpg"
+    image_path.write_bytes(b"fake-image-bytes")
+    fake_client = FakeOllamaClient('{"label": "organic", "confidence": 0.5, "reason": "n/a"}')
+    monkeypatch.setattr(vlm_zero_shot, "client", fake_client)
+
+    classify_with_vlm(image_path)
+
+    assert fake_client.last_call["model"] == "qwen2.5vl:3b"

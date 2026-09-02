@@ -1,0 +1,43 @@
+services:
+  ollama:
+    build:
+      context: ./docker/ollama
+    environment:
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5vl:3b}
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    healthcheck:
+      # Only "healthy" once the model is actually pulled, not just once the server
+      # responds — the first pull of a multi-GB model can take several minutes.
+      test: ["CMD-SHELL", "ollama list | grep -q '${OLLAMA_MODEL:-qwen2.5vl:3b}' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 60
+      start_period: 30s
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      args:
+        APP_UID: ${APP_UID:-1000}
+        APP_GID: ${APP_GID:-1000}
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5vl:3b}
+      ADC_DATA_DIR: /app/data/o-vs-r-split
+      ADC_ARTIFACTS_DIR: /app/artifacts
+    ports:
+      - "${APP_PORT:-8501}:8501"
+    volumes:
+      - ./data:/app/data:ro
+      - ./artifacts:/app/artifacts
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

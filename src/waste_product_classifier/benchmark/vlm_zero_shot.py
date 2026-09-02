@@ -18,7 +18,7 @@ Respond with ONLY a JSON object in this exact format, no extra text:
 {"label": "recyclable" | "organic", "confidence": <float 0-1>, "reason": "<one short sentence>"}
 """
 
-def classify_with_vlm(image_path: str, model_name: str = "qwen2.5vl") -> dict:
+def classify_with_vlm(image_path: str, model_name: str = "qwen2.5vl:3b") -> dict:
     with open(image_path, "rb") as f:
         img_bytes = f.read()
 
