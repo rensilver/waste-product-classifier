@@ -10,7 +10,7 @@ from waste_product_classifier.config import load_config
 from waste_product_classifier.gradcam.gradcam import get_class_names, load_and_preprocess_image
 from waste_product_classifier.benchmark.vlm_zero_shot import OLLAMA_HOST, classify_with_vlm
 
-VLM_MODEL = "qwen2.5v1"
+VLM_MODEL = "qwen2.5vl"
 RESULTS_FILENAME = "benchmark_results.csv"
 
 # Keep this modest — VLM calls are much slower than a batched CNN forward pass
@@ -74,11 +74,11 @@ def run_benchmark() -> pd.DataFrame:
             "vlm_correct": vlm_result["label"] == row["true_label"]
         })
 
-        df = pd.DataFrame(results)
-        results_path = config.artifacts_dir / RESULTS_FILENAME
-        df.to_csv(results_path, index=False)
-        print_summary(df)
-        return df
+    df = pd.DataFrame(results)
+    results_path = config.artifacts_dir / RESULTS_FILENAME
+    df.to_csv(results_path, index=False)
+    print_summary(df)
+    return df
 
 def print_summary(df: pd.DataFrame) -> None:
     summary = pd.DataFrame({
