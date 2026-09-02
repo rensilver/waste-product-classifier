@@ -4,10 +4,13 @@ from waste_product_classifier.vision.callbacks import build_callbacks
 from waste_product_classifier.config import load_config
 from waste_product_classifier.vision.data import get_datasets
 from waste_product_classifier.vision.model import build_model
+from waste_product_classifier.vision.plotting import plot_history
 
 logger = logging.getLogger(__name__)
 
 FEATURE_EXTRACT_CHECKPOINT = "feature_extract_vgg16.keras"
+FEATURE_EXTRACT_ACCURACY_CURVE = "feature_extract_accuracy_curve.png"
+FEATURE_EXTRACT_LOSS_CURVE = "feature_extract_loss_curve.png"
 
 def main():
     logging.basicConfig(level=logging.INFO)
@@ -30,4 +33,17 @@ def main():
     )
 
     logger.info("Feature-extraction training complete. Best checkpoint: %s", checkpoint_path)
+
+    accuracy_path = config.artifacts_dir / FEATURE_EXTRACT_ACCURACY_CURVE
+    loss_path = config.artifacts_dir / FEATURE_EXTRACT_LOSS_CURVE
+    plot_history(
+        history, 
+        accuracy_path,
+        loss_path,
+        title_prefix="Feature-Extraction - "
+    )
+    logger.info(
+        "Saved curves: %s, %s", accuracy_path, loss_path
+    )
+
     return history
