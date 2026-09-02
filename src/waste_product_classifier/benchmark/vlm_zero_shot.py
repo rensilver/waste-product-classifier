@@ -6,7 +6,9 @@ import time
 
 import ollama
 
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+from waste_product_classifier.config import DEFAULT_OLLAMA_HOST
+
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", DEFAULT_OLLAMA_HOST)
 client = ollama.Client(OLLAMA_HOST)
 
 PROMPT = """You are a waste-sorting assistant. Look at the image and classify the item as

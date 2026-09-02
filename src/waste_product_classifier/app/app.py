@@ -8,6 +8,7 @@ import streamlit as st
 from waste_product_classifier.config import load_config
 from waste_product_classifier.evaluation.evaluation import evaluate_models
 from waste_product_classifier.gradcam.gradcam import get_class_names, load_and_preprocess_image, make_gradcam_heatmap, overlay_heatmap
+from waste_product_classifier.inference import classify_score
 from waste_product_classifier.vision.train import FEATURE_EXTRACT_ACCURACY_CURVE, FEATURE_EXTRACT_LOSS_CURVE
 from waste_product_classifier.benchmark.vlm_zero_shot import classify_with_vlm
  
@@ -33,8 +34,7 @@ def _classify_and_explain(model, class_names, img_path, target_size, overlay_pat
     """Shared CNN + Grad-CAM logic used by both the Classify and Benchmark tabs."""
     img_array = load_and_preprocess_image(img_path, target_size)
     heatmap, raw_score = make_gradcam_heatmap(img_array, model)
-    label = class_names[1] if raw_score >= 0.5 else class_names[0]
-    confidence = raw_score if raw_score >= 0.5 else 1 - raw_score
+    label, confidence = classify_score(raw_score, class_names)
  
     overlay_path.parent.mkdir(parents=True, exist_ok=True)
     overlay_heatmap(img_path, heatmap, output_path=overlay_path)

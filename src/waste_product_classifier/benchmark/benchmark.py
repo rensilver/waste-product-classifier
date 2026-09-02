@@ -8,6 +8,7 @@ from keras.models import load_model
 from keras import Model
 from waste_product_classifier.config import load_config
 from waste_product_classifier.gradcam.gradcam import get_class_names, load_and_preprocess_image
+from waste_product_classifier.inference import classify_score
 from waste_product_classifier.benchmark.vlm_zero_shot import OLLAMA_HOST, classify_with_vlm
 
 VLM_MODEL = "qwen2.5vl"
@@ -41,8 +42,7 @@ def predict_cnn(model: Model, img_path: Path,
     raw_score = float(model.predict(img_array, verbose=0)[0][0])
     latency = time.time() - start
 
-    label = class_names[1] if raw_score >= 0.5 else class_names[0]
-    confidence = raw_score if raw_score >= 0.5 else 1 - raw_score
+    label, confidence = classify_score(raw_score, class_names)
     return label, confidence, latency
 
 def run_benchmark() -> pd.DataFrame:

@@ -17,7 +17,7 @@ def train_model():
     config = load_config()
     config.artifacts_dir.mkdir(parents=True, exist_ok=True)
 
-    train_ds, val_ds, test_ds, class_names = get_datasets(config)
+    train_ds, val_ds, _, class_names = get_datasets(config)
     logger.info("Feature-extraction training - classes: %s", class_names)
 
     model = build_model(config)

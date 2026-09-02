@@ -26,7 +26,7 @@ def validate_dirs(config: Config) -> None:
         ("test_dir", config.test_dir)
     ]:
         if not Path(path).is_dir():
-            raise FileNotFoundError(f"{name} não encontrado: {path}")
+            raise FileNotFoundError(f"{name} not found: {path}")
 
 def load_dataset(directory: Path, config: Config, *, shuffle: bool) -> tf.data.Dataset:
     return image_dataset_from_directory(
