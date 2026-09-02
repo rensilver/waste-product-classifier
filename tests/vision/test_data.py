@@ -40,7 +40,7 @@ def test_validate_dirs_raises_when_a_split_is_missing(config):
     config.valid_dir.mkdir(parents=True)
     # test_dir intentionally not created
 
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises(FileNotFoundError, match="test_dir not found"):
         validate_dirs(config)
 
 

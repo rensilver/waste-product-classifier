@@ -20,7 +20,7 @@ def fine_tune_model():
     config = load_config()
     config.artifacts_dir.mkdir(parents=True, exist_ok=True)
 
-    train_ds, val_ds, test_ds, class_names = get_datasets(config)
+    train_ds, val_ds, _, class_names = get_datasets(config)
     logger.info("Fine-tuning - classes: %s", class_names)
 
     feature_extractor_checkpoint = config.artifacts_dir / FEATURE_EXTRACT_CHECKPOINT

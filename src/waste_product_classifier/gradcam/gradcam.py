@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import cv2
-import matplotlib.cm as cm
+import matplotlib
 import numpy as np
 import tensorflow as tf
 
@@ -58,7 +58,7 @@ def overlay_heatmap(img_path: Path, heatmap: np.ndarray, alpha: float = 0.4, out
     heatmap_resized = cv2.resize(heatmap, (img.shape[1], img.shape[0]))
     heatmap_uint8 = np.uint8(255 * heatmap_resized)
 
-    jet = cm.get_cmap("jet")
+    jet = matplotlib.colormaps["jet"]
     jet_colors = jet(np.arange(256))[:, :3]
     jet_heatmap = jet_colors[heatmap_uint8]
     jet_heatmap = np.uint8(jet_heatmap * 255)

@@ -107,6 +107,16 @@ def test_overlay_heatmap_matches_original_image_dimensions(tmp_path):
     assert overlay.shape == (10, 20, 3)
 
 
+def test_overlay_heatmap_does_not_use_deprecated_colormap_api(tmp_path, recwarn):
+    image_path = tmp_path / "img.jpg"
+    Image.new("RGB", (20, 10), color=(10, 20, 30)).save(image_path)
+    heatmap = np.random.rand(4, 4).astype("float32")
+
+    overlay_heatmap(image_path, heatmap)
+
+    assert not any("get_cmap" in str(w.message) for w in recwarn.list)
+
+
 def test_overlay_heatmap_writes_output_file_when_path_given(tmp_path):
     image_path = tmp_path / "img.jpg"
     Image.new("RGB", (20, 10), color=(10, 20, 30)).save(image_path)
