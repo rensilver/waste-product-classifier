@@ -1,12 +1,14 @@
 import logging
 
-import keras
+from keras.models import load_model
+from keras.optimizers import RMSprop
 
 from waste_product_classifier.vision.callbacks import build_callbacks
 from waste_product_classifier.config import load_config
 from waste_product_classifier.vision.data import get_datasets
 from waste_product_classifier.vision.model import unfreeze_from
 from waste_product_classifier.vision.train import FEATURE_EXTRACT_CHECKPOINT
+from waste_product_classifier.evaluation.plotting import plot_history
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +24,7 @@ def fine_tune_model():
     logger.info("Fine-tuning - classes: %s", class_names)
 
     feature_extractor_checkpoint = config.artifacts_dir / FEATURE_EXTRACT_CHECKPOINT
-    model = keras.models.load_model(feature_extractor_checkpoint)
+    model = load_model(feature_extractor_checkpoint)
     logger.info("Loaded feature-extraction checkpoint: %s", feature_extractor_checkpoint)
 
     # model.layers[0] is the VGG16 base (see model.build_classifier)
@@ -33,7 +35,7 @@ def fine_tune_model():
 
     model.compile(
         loss="binary_crossentropy",
-        optimizer=keras.optimizers.RMSprop(learning_rate=FINE_TUNE_LEARNING_RATE),
+        optimizer=RMSprop(learning_rate=FINE_TUNE_LEARNING_RATE),
         metrics=["accuracy"]
     )
 
