@@ -45,7 +45,7 @@ def build_callbacks(
         EarlyStopping(
             monitor="val_loss",
             patience=patience,
-            model="min",
+            mode="min",
             min_delta=min_delta
         ),
         ModelCheckpoint(
@@ -53,6 +53,6 @@ def build_callbacks(
             monitor="val_loss",
             save_best_only=True,
             save_weights_only=False,
-            model="min"
+            mode="min"
         )
     ]    

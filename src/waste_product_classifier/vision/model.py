@@ -11,7 +11,7 @@ def build_vgg16_base(input_shape: tuple[int, int, int]) -> Model:
         input_shape=input_shape
     )
 
-    output = vgg16_base[-1].output
+    output = vgg16_base.output
     output = layers.Flatten()(output)
     base_model = Model(vgg16_base.input, output, name="vgg16_base")
 
